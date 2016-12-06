@@ -1,13 +1,71 @@
-<div class="container" ng-controller="kibanaCsvImporterPluginHelloWorld">
-  <div class="row">
-    <div class="col-12-sm">
-      <div class="well">
-        <h2>Congratulations</h2>
-        <p class="lead">You've successfully created your first Kibana Plugin!</p>
-      </div>
-      <h1>{{ title }}</h1>
-      <p class="lead">{{ description }}</p>
-      <p>The current time is {{ currentTime }}</p>
+<form name="form"
+      ng-submit="vm.onSubmit(form)"
+      ng-controller="FileUploadCtrl"
+      class="import-pod"
+      novalidate>
+
+    <div class="container">
+        <h1>Import Pod</h1>
+
+        <button ng-click="vm.createNewPod()" class="btn btn-primary">
+            Create new pod
+        </button>
+
+        <p>or select existing</p>
+
+        <select ng-model="vm.podName">
+            <option ng-repeat="podName in vm.allPods">{{:: podName}}</option>
+        </select>
+
+        <div ng-if="vm.podName">
+            <h2>Upload .csv file</h2>
+            <div class="upload">
+                <div class="drop-box" ng-if="!vm.file"
+                     ngf-drop="vm.onFilesDrop($files)"
+                     ngf-drag-over-class="{accept:'accept', reject:'reject'}"
+                     ngf-multiple="false"
+                     ngf-pattern="'text/csv'">Drop CSV file
+                </div>
+                <div ng-if="vm.file">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Size</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ vm.file.name }}</td>
+                            <td>{{ vm.file.size }}</td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-danger" ng-click="vm.removeFile()">Remove</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <hr/>
+
+                    <div class="well" ng-if="vm.errors.length">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                        </div>
+                        <pre ng-repeat="error in vm.errors">{{:: error}}</pre>
+                    </div>
+
+                    <div class="alert alert-success" role="alert" ng-if="vm.showImportSuccessMessage">
+                        <strong>Well done! 🎉</strong> Pod successfully imported!
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary loader"
+                            ng-class="{'in-progress': vm.importInProgress}"
+                            ng-disabled="vm.importInProgress">Import
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</form>

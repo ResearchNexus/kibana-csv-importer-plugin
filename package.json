@@ -21,5 +21,10 @@
     "chai": "^3.5.0",
     "eslint": "1.10.3",
     "eslint-plugin-mocha": "1.1.0"
+  },
+  "dependencies": {
+    "ng-file-upload": "^12.2.13",
+    "papaparse": "^4.1.2",
+    "randomstring": "^1.1.5"
   }
 }
