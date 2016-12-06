@@ -1,10 +1,10 @@
 {
   "name": "kibana_csv_importer_plugin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An awesome Kibana plugin",
   "main": "index.js",
   "kibana": {
-    "version": "kibana"
+    "version": "v5.0.2"
   },
   "scripts": {
     "lint": "eslint",
