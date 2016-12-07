@@ -7,9 +7,11 @@
     <div class="container">
         <h1>Import Pod</h1>
 
-        <button ng-click="vm.createNewPod()" class="btn btn-primary">
-            Create new pod
-        </button>
+        <button type="button"
+                class="btn btn-primary loader"
+                ng-click="vm.createNewPod()"
+                ng-class="{'in-progress': vm.podCreationInProgress}"
+                ng-disabled="vm.podCreationInProgress">Create new pod</button>
 
         <p>or select existing</p>
 
